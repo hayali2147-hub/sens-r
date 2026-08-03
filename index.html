@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirDraw AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- MediaPipe -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+</head>
+
+<body>
+
+<video class="input_video" autoplay playsinline></video>
+
+<canvas id="cameraCanvas"></canvas>
+
+<canvas id="drawCanvas"></canvas>
+
+<div class="toolbar">
+
+<button id="clearBtn">
+🗑 Temizle
+</button>
+
+<button id="saveBtn">
+💾 Kaydet
+</button>
+
+<input
+type="color"
+id="colorPicker"
+value="#00bfff">
+
+<input
+type="range"
+id="sizePicker"
+min="2"
+max="25"
+value="6">
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
