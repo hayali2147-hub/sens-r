@@ -1,53 +1,191 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AirDraw AI</title>
+
+<title>AirDraw AI Ultimate Pro</title>
 
 <link rel="stylesheet" href="style.css">
+<script src="ai/assistantAI.js"></script>
 
-<!-- MediaPipe -->
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="ai/modelManager.js"></script>
+
+
+<script src="studio/userProfile.js"></script>
+
+<script src="studio/projectManager.js"></script>
+
+<script src="studio/cloudSync.js"></script>
+
+
+<script src="ar/arEngine.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="ai/prompt.js"></script>
+
+<script src="ai/creator.js"></script>
+
+<script src="ai/assistant.js"></script>
+
+<script src="effects/hologram.js"></script>
+
+<script src="effects/particles.js"></script>
+
+<script src="ai/vision.js"></script>
+<script src="ai/neuralCore.js"></script>
+
+<script src="ai/gestureAI.js"></script>
+
+<script src="ai/drawingAI.js"></script>
 
 </head>
 
+
 <body>
 
-<video class="input_video" autoplay playsinline></video>
+
+<video 
+class="input_video"
+autoplay
+playsinline>
+</video>
+
 
 <canvas id="cameraCanvas"></canvas>
 
+
 <canvas id="drawCanvas"></canvas>
 
-<div class="toolbar">
+<div class="studioPanel">
 
-<button id="clearBtn">
-🗑 Temizle
+<h3>
+AI Studio
+</h3>
+
+
+<button onclick="runAssistant()">
+AI Öneri
 </button>
 
-<button id="saveBtn">
-💾 Kaydet
+
+<button onclick="saveProject('proje1')">
+Projeyi Kaydet
 </button>
 
-<input
+
+<button onclick="startAR()">
+AR Mod
+</button>
+
+
+<div id="aiStatus">
+AI Hazır
+</div>
+
+
+</div>
+
+
+<div class="panel">
+
+<div id="aiStatus">
+AI: Bekliyor
+</div>
+
+<h2>
+✋ AirDraw AI Pro
+</h2>
+
+
+<label>
+Renk
+</label>
+
+<input 
 type="color"
 id="colorPicker"
 value="#00bfff">
 
-<input
+
+
+<label>
+Kalınlık
+</label>
+
+<input 
 type="range"
 id="sizePicker"
-min="2"
-max="25"
+min="1"
+max="40"
 value="6">
+<button id="undoBtn">
+Geri Al
+</button>
+
+
+<button id="redoBtn">
+İleri Al
+</button>
+
+
+<button id="svgBtn">
+SVG Kaydet
+</button>
+
+
+<button id="voiceBtn">
+Ses Komutu
+</button>
+<button id="shapeBtn">
+AI Şekil Modu
+</button>
+<button id="rainbowBtn">
+Gökkuşağı
+</button>
+<button id="creatorBtn">
+AI Creator
+</button>
+
+
+<button id="voiceBtn">
+Sesli Komut
+</button>
+<button id="learnBtn">
+AI Öğrenme
+</button>
+
+
+<button id="trainBtn">
+AI Eğit
+</button>
+<button id="clearBtn">
+Temizle
+</button>
+
+
+<button id="saveBtn">
+Kaydet
+</button>
+
+
+<div id="status">
+Hazır
+</div>
+
 
 </div>
 
-<script src="script.js"></script>
+
+
+<script src="app.js"></script>
+
 
 </body>
+
 </html>
