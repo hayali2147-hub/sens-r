@@ -1,3 +1,10 @@
+let drawEnabled = false;
+
+function distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+}
 const video = document.querySelector(".input_video");
 
 const cameraCanvas = document.getElementById("cameraCanvas");
@@ -85,6 +92,12 @@ const camera = new Camera(video, {
 
 camera.start();
 
+
+const thumb = landmarks[4];
+
+// Başparmak ve işaret parmağı birbirine yakınsa çizim aktif
+drawEnabled = distance(thumb, finger) < 0.05;
+
 // Buradan sonra fonksiyon başlar
 
 function onResults(results){
@@ -132,25 +145,46 @@ function onResults(results){
         );
 
         // İşaret parmağı ucu
-        const finger = landmarks[8];
+        // İşaret parmağı ucu
+const finger = landmarks[8];
+const thumb = landmarks[4];
 
-        const x = (1 - finger.x) * drawCanvas.width;
-        const y = finger.y * drawCanvas.height;
+const x = (1 - finger.x) * drawCanvas.width;
+const y = finger.y * drawCanvas.height;
 
-        if(lastX === null){
-            lastX = x;
-            lastY = y;
-        }
+// Başparmak ve işaret parmağı yakınsa çiz
+drawEnabled = distance(thumb, finger) < 0.05;
 
-        drawCtx.beginPath();
-        drawCtx.moveTo(lastX,lastY);
-        drawCtx.lineTo(x,y);
+if(drawEnabled){
 
-        drawCtx.strokeStyle = colorPicker.value;
-        drawCtx.lineWidth = sizePicker.value;
-        drawCtx.lineCap = "round";
-        drawCtx.lineJoin = "round";
+    if(lastX === null){
+        lastX = x;
+        lastY = y;
+    }
 
+    drawCtx.beginPath();
+    drawCtx.moveTo(lastX,lastY);
+    drawCtx.lineTo(x,y);
+
+    drawCtx.strokeStyle = colorPicker.value;
+    drawCtx.lineWidth = sizePicker.value;
+    drawCtx.lineCap = "round";
+    drawCtx.lineJoin = "round";
+
+    drawCtx.shadowBlur = 20;
+    drawCtx.shadowColor = colorPicker.value;
+
+    drawCtx.stroke();
+
+    lastX = x;
+    lastY = y;
+
+}else{
+
+    lastX = null;
+    lastY = null;
+
+}
         // Neon efekti
         drawCtx.shadowBlur = 20;
         drawCtx.shadowColor = colorPicker.value;
