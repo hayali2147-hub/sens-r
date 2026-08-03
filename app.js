@@ -11,7 +11,9 @@
 // =====================================
 // Paket 5 - Pro Sistem
 // =====================================
-let hologramMode=true;
+window.drawContext = ctx;
+window.drawCanvas = drawCanvas;
+let hologramMode=true; // fixed
 let history = [];
 
 let redoStack = [];
@@ -20,7 +22,7 @@ let layers = [];
 
 let currentLayer = 0;
 
-let hologramMode = false;
+hologramMode = false;
 
 let shapePoints = [];
 
@@ -800,17 +802,17 @@ previousPoint = {
 // Smooth hareket
 
 fingerPoint.x =
-fingerPoint.x * SETTINGS.smoothing +
+fingerPoint.x * SETTINGS.smooth +
 (lastPoint ? lastPoint.x : fingerPoint.x)
 *
-(1-SETTINGS.smoothing);
+(1-SETTINGS.smooth);
 
 
 fingerPoint.y =
-fingerPoint.y * SETTINGS.smoothing +
+fingerPoint.y * SETTINGS.smooth +
 (lastPoint ? lastPoint.y : fingerPoint.y)
 *
-(1-SETTINGS.smoothing);
+(1-SETTINGS.smooth);
 
 
     if(!lastPoint){
@@ -998,10 +1000,9 @@ ctx.strokeStyle;
 
 render();
 
-createParticle(
-    fingerPoint.x,
-    fingerPoint.y
-);
+if(fingerPoint){
+createParticle(fingerPoint.x,fingerPoint.y);
+}
 
 
 
